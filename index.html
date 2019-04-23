@@ -39,22 +39,25 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
-     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+     <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.mobile-1.4.5.min.js"></script>
+    
  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-<link href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" rel="stylesheet"/>
+<link href="css/jquery.mobile-1.4.5.min.css" rel="stylesheet"/>
     <title>Hello World</title>
     <script>
         var cache=0;
+        var op="+";
 
             function getDisplay() {
                 return $('#display').val();
             }
 
             function setDisplay(val) {
-                $('#display').val(val);
+                $('#display').val(parseInt(val) );
             }
             $(document).ready(function () {
-
+                setDisplay('0');
                 $('button').click(function () {
                     setDisplay(getDisplay() + $(this).text());
                 });
@@ -62,12 +65,29 @@
                 $('#ba').click(function(){
                     cache=parseFloat(getDisplay());
                     setDisplay('');
+                    op='+';
+                      }
+                      );
+                 $('#bm').click(function(){
+                    cache=parseFloat(getDisplay());
+                    setDisplay('');
+                     op='-';
                       }
                       );
                 $('#be').click(function(){
                     var tosum=parseFloat(getDisplay());
-                    setDisplay(tosum+cache);
+                    if (op==='+')
+                        setDisplay(tosum+cache);
+                    else
+                        setDisplay(cache-tosum);
                     cache=0;
+                      }
+                      );
+                
+                $('#bc').click(function(){
+                    cache='';
+                    setDisplay('0');
+                     op='+';
                       }
                       );
                 
@@ -80,8 +100,8 @@
 
 <body>
     <div class="app">
-        <h1>Hallo PhoneGap</h1>
-        <div id="deviceready" class="blink">
+        <h1>Simple calc</h1>
+        <div id="deviceready">
             <p class="event listening">Connecting to Device</p>
             <p class="event received">
              <table style="width: 100px">
@@ -136,9 +156,20 @@
                         <input type="button" id="ba" value="+">
                     </td>
                     <td>
-                        <input type="button" id="be" value="=">
+                        <input type="button" id="bm" value="-">
                     </td>
                 </tr>
+                 <tr>
+                    <td>
+                        <input type="button" id="be" value="=">
+                     </td>
+                     <td>                     
+                        <input type="button" id="bc" value="C"> 
+                     </td>
+                     <td>
+                        &nbsp;
+                     </td>
+                 </tr>
 
             </table>
             </p>
