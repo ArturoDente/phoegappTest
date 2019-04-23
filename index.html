@@ -42,6 +42,7 @@
     <script   src="https://code.jquery.com/jquery-2.2.4.min.js" ></script>
     <title>Hello World</title>
     <script>
+        var cache=0;
 
             function getDisplay() {
                 return $('#display').val();
@@ -55,7 +56,23 @@
                 $('button').click(function () {
                     setDisplay(getDisplay() + $(this).text());
                 });
+                
+                $('#ba').click(function(){
+                    cache=parseFloat(getDisplay());
+                    setDisplay('');
+                      }
+                      );
+                $('#be').click(function(){
+                    var tosum=parseFloat(getDisplay());
+                    setDisplay(tosum+cache);
+                    cache=0;
+                      }
+                      );
+                
             });
+        
+        
+        
         </script>
 </head>
 
